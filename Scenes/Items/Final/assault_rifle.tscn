@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Items/BaseClasses/gun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sprites/Items/Weapons/ak_rifle.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Actor/hand.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fire"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 0 ]
+}
+
+[node name="assault_rifle" instance=ExtResource( 1 )]
+icon_rect = null
+item_name = "Basic Item"
+description = "An item."
+handle_offset = Vector2( -6, -2 )
+two_handed = true
+damage = 1.0
+accuracy = 0.85
+bullet_scene = "res://scenes/items/bullets/bullet.tscn"
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="fire_point" type="Position2D" parent="Sprite" index="0"]
+position = Vector2( 17, -3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interactable/area" index="0"]
+polygon = PoolVector2Array( -20, 3, -20, -4, -11, -6, 9, -6, 9, -2, 2, 6 )
+
+[node name="AnimationPlayer" parent="." index="3"]
+anims/fire = SubResource( 1 )
+
+[node name="hands" parent="." index="4"]
+visible = true
+
+[node name="hand" parent="hands" index="0"]
+position = Vector2( -8, 1 )
+
+[node name="hand2" type="Sprite" parent="hands" index="1"]
+position = Vector2( 3, -1 )
+texture = ExtResource( 3 )
+
+[editable path="interactable"]

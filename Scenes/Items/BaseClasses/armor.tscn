@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Items/BaseClasses/equippable.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Items/BaseClasses/armor.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Items/States/item_state_pickup.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Items/States/item_state_equipped.gd" type="Script" id=4]
+
+
+
+
+
+[node name="armor" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="pickup" type="Node" parent="item_state" index="0"]
+script = ExtResource( 3 )
+is_starting_state = true
+
+[node name="equipped" type="Node" parent="item_state" index="1"]
+script = ExtResource( 4 )

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Items/BaseClasses/armor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sprites/Items/Helmets/dark_hood.png" type="Texture" id=2]
+
+[node name="rag_hood" instance=ExtResource( 1 )]
+icon_rect = null
+item_name = "Rag Hood"
+description = "Better than nothing."
+slot = "helmet"
+hide_host = true
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interactable/area" index="0"]
+polygon = PoolVector2Array( -12, 3, -12, -17, -9, -19, 10, -19, 14, -11, 14, 1, 10, 5, -10, 5 )
+
+[editable path="interactable"]

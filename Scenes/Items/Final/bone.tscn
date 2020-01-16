@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Items/BaseClasses/thrown_item.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sprites/Items/Weapons/bone.png" type="Texture" id=2]
+
+[node name="bone" instance=ExtResource( 1 )]
+icon_rect = null
+item_name = "Bone"
+description = "Dog's love these."
+slot = "weapon"
+fetchable = true
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+hframes = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interactable/area" index="0"]
+polygon = PoolVector2Array( -6, -2, 6, -2, 6, 3, -6, 3 )
+
+[editable path="interactable"]
