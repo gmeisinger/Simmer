@@ -18,12 +18,34 @@ func _input(event):
 		selected.select_lock(true)
 	elif event.is_action_released("command") and selected:
 		var character = selected.get_parent()
-		if not character.has_method("command"): return
+		if not character.has_method("execute_command"): return
+		# these should all send commands
+		character.clear_commands()
+		var command = Command.new()
 		if soft_selected.empty():
-			character.move_target = get_global_mouse_position()
+			# CHARACTER MOVE COMMAND
+			command = get_command_move(get_global_mouse_position())
+			character.execute_command(command)
 		else:
+			# CHARACTER INTERACT COMMAND
+			# AUTOMATICALLY MOVES FIRST
 			var target = soft_selected[0]
-			character.interact_with(target)
+			if character.get_global_position().distance_to(target.get_global_position()) > character.INTERACT_RANGE:
+				character.move_threshold = character.INTERACT_RANGE
+				character.add_command(get_command_move(target.get_global_position()))
+			command.action_name = "interact"
+			command.next_state = "interacting"
+			command.set_parameter("interact_target", target)
+			character.add_command(command)
+
+func get_command_move(move_target : Vector2):
+	var command = Command.new()
+	command.action_name = "move"
+	command.next_state = "moving"
+	command.parameters = {
+		"move_target" : move_target
+		}
+	return command
 
 func _on_mouse_over(set, interactable_node):
 	if set:
@@ -46,3 +68,12 @@ static func sort_by_position(a, b):
 	if a.global_position.y > b.global_position.y:
 		return true
 	return false
+
+class Command:
+	
+	var action_name : String
+	var next_state : String
+	var parameters  = {}
+	
+	func set_parameter(_name : String, _val):
+		parameters[_name] = _val
