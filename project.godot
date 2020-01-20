@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 
 globals="*res://Util/Autoloads/globals.gd"
 SignalMgr="*res://Util/Autoloads/SignalMgr.gd"
+Command="*res://Util/Commands/Command.gd"
 
 [input]
 
@@ -71,9 +72,16 @@ command={
  ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [layer_names]
 
 2d_physics/layer_1="walls"
+2d_physics/layer_2="player"
+2d_physics/layer_3="character"
+2d_physics/layer_4="projectile"
 
 [rendering]
 

@@ -1,5 +1,7 @@
 extends Node
 
+signal changing_state()
+
 var current_state = null
 
 export var debug : bool
@@ -18,6 +20,7 @@ func _ready():
 		print_dbg("no starting state")
 
 func change_state(state_name):
+	emit_signal("changing_state")
 	if current_state != null:
 		print_dbg("exiting state " + current_state.name)
 		current_state.exit()

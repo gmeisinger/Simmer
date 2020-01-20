@@ -1,10 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/player_camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Player/BoxSelect/BoxSelect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/MenuComponents/ActionMenu/ActionMenu.tscn" type="PackedScene" id=4]
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 1 )
+player_color = Color( 0.117647, 0.435294, 0.313726, 1 )
 
 [node name="player_camera" parent="." instance=ExtResource( 2 )]
 current = true
+
+[node name="BoxSelect" parent="." instance=ExtResource( 3 )]
+
+[node name="ActionMenu" parent="." instance=ExtResource( 4 )]
+[connection signal="detected_list_updated" from="BoxSelect" to="." method="_on_BoxSelect_detected_list_updated"]
+[connection signal="hard_select" from="BoxSelect" to="." method="_on_BoxSelect_hard_select"]
+[connection signal="item_selected" from="ActionMenu" to="." method="_on_ActionMenu_item_selected"]

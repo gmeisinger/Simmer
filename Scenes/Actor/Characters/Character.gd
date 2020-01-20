@@ -8,8 +8,15 @@ signal arrived_at_move_target()
 var command_queue = []
 
 onready var move_threshold = ARRIVAL_DISTANCE
+
+#target vars
 onready var move_target = get_position()
 var interact_target
+var interact_action : String
+var focus_target
+
+func _ready():
+	set_player(true)
 
 func process_movement(delta):
 	if position.distance_to(move_target) > move_threshold:
@@ -22,10 +29,13 @@ func process_movement(delta):
 		if velocity.length() < 0.1:
 			velocity = Vector2.ZERO
 			emit_signal("arrived_at_move_target")
-	h_face = sign(velocity.x)
+	if velocity.x != 0.0:
+		h_face = sign(velocity.x)
 	face_sprites(h_face, sign(velocity.y))
 
-func add_command(new_command):
+# Command Methods
+
+func queue_command(new_command):
 	command_queue.append(new_command)
 
 func execute_command(new_command):
@@ -39,10 +49,10 @@ func clear_commands():
 	$stateMachine.change_state("idle")
 
 # THIS MEANS TO INTERACT WITH THE TARGET
-func interact_with(target):
+func interact_with(target, action_name : String):
 	if not target.has_method("interact"):
 		return
-	target.interact(self)
+	target.interact(self, action_name)
 
 # THIS MEANS TO BE INTERACTED WITH BY THE TARGET
 func interact(source, selected_action : String):
@@ -53,5 +63,27 @@ func interact(source, selected_action : String):
 
 func get_target():
 	var target_vec = Vector2(h_face * 100.0, 0.0)
+	if focus_target:
+		target_vec = focus_target.global_position - global_position
 	return target_vec
 
+func set_player(set : bool):
+	$interactable.set_player(set)
+
+func is_player():
+	return $interactable.get_node("area").get_collision_layer_bit(1)
+
+# Combat functions
+func damage(amt : float):
+	$StatBlock.damage(amt)
+
+func heal(amt : float):
+	$StatBlock.heal(amt)
+
+#Death
+
+func die():
+	queue_free()
+
+func _on_StatBlock_zero_health():
+	$stateMachine.change_state("dying")

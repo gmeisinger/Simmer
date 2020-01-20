@@ -9,5 +9,4 @@ func update(delta):
 	host.process_move_and_collide(delta)
 	
 func _on_Character_arrived():
-	print("arrival detected")
 	change_state("idle")

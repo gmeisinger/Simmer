@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/MenuComponents/ActionMenu/ActionMenu.gd" type="Script" id=1]
+
+[node name="ActionMenu" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="menu" type="PopupMenu" parent="."]
+margin_right = 20.0
+margin_bottom = 20.0
+[connection signal="index_pressed" from="menu" to="." method="_on_menu_index_pressed"]

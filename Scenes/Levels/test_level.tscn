@@ -8,10 +8,10 @@
 
 [node name="test_level" index="0" instance=ExtResource( 1 )]
 
-[node name="Character" parent="objects" index="0" instance=ExtResource( 2 )]
-position = Vector2( 126, 94 )
+[node name="Tom" parent="objects" index="0" instance=ExtResource( 2 )]
+position = Vector2( 123.644, 75.7828 )
 
-[node name="Character2" parent="objects" index="1" instance=ExtResource( 2 )]
+[node name="Jerry" parent="objects" index="1" instance=ExtResource( 2 )]
 position = Vector2( 137, 81 )
 
 [node name="assault_rifle" parent="objects" index="2" instance=ExtResource( 3 )]

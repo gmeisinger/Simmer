@@ -3,6 +3,7 @@ extends "res://Scenes/StateMachine/baseState.gd"
 func enter():
 	host.move_target = host.get_global_position()
 	host.move_threshold = host.ARRIVAL_DISTANCE
+	host.focus_target = null
 
 func update(delta):
 	if not host.command_queue.empty():
