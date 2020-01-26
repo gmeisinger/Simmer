@@ -1,5 +1,9 @@
 extends "res://Scenes/StateMachine/baseState.gd"
 
+func enter():
+	host.disable_focus()
+	host.disable_interact()
+
 func update(delta):
 	if host.velocity == Vector2.ZERO:
 		host.play_anim("idle")

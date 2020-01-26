@@ -22,11 +22,13 @@ tracks/0/keys = {
 }
 
 [node name="assault_rifle" instance=ExtResource( 1 )]
+item_name = "Assault Rifle"
+description = "Pew Pew."
 handle_offset = Vector2( -6, -2 )
 two_handed = true
-damage = 1.0
+damage = 5.0
 accuracy = 0.85
-bullet_scene = "res://scenes/items/bullets/bullet.tscn"
+bullet_scene = "res://scenes/Items/Bullets/bullet.tscn"
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
@@ -34,12 +36,14 @@ texture = ExtResource( 2 )
 [node name="fire_point" type="Position2D" parent="Sprite" index="0"]
 position = Vector2( 17, -3 )
 
-[node name="interactable" parent="." index="1"]
-option_lines = "pickup
-equip"
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interactable/area" index="0"]
 polygon = PoolVector2Array( -20, 3, -20, -4, -11, -6, 9, -6, 9, -2, 2, 6 )
+
+[node name="host_name" parent="interactable" index="1"]
+margin_left = -22.4834
+margin_top = -19.7439
+margin_right = 17.5166
+margin_bottom = -5.74387
 
 [node name="AnimationPlayer" parent="." index="3"]
 anims/fire = SubResource( 1 )

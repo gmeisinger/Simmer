@@ -13,6 +13,8 @@ var shirt_color_index = 0
 var pants_index = 0
 var pants_color_index = 0
 
+export(String, FILE, "*.tscn") var next_scene
+
 onready var model = $panel/actor
 
 func _ready():
@@ -218,10 +220,14 @@ func _on_start_button_button_up():
 	}
 		
 	globals.set("player_fashion", fashion_dict)
-	#transitionMgr.transitionTo("res://scenes/zones/complex1.tscn")
+	#transitionMgr.transitionTo(next_scene)
+	$Tween.interpolate_property(self, "self_modulate", self_modulate, Color(0.0,0.0,0.0,0.0), 0.4,Tween.TRANS_LINEAR, Tween.EASE_IN)
+	$Tween.start()
 	$panel/actor.play_anim("dodge")
 	yield($panel/actor/AnimationPlayer, "animation_finished")
 	$panel/actor.play_anim("idle")
+	SceneLoader._current_scene = self
+	SceneLoader.load_scene(next_scene)
 	pass # Replace with function body.
 
 

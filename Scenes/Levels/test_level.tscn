@@ -1,24 +1,84 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Zone/zone.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Actor/Characters/Character.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Items/Final/assault_rifle.tscn" type="PackedScene" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Levels/test_level.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Items/Final/assault_rifle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Items/Final/pistol.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Actor/Characters/Character.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Items/Final/cash.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Items/Final/leather_jacket.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Items/Final/machine_pistol.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Items/Final/rags.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Items/Final/rag_hood.tscn" type="PackedScene" id=11]
+[ext_resource path="res://icon.png" type="Texture" id=12]
+[ext_resource path="res://Scenes/Zone/CombatManager/CombatManager.tscn" type="PackedScene" id=13]
 
 [node name="test_level" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
 
-[node name="Tom" parent="objects" index="0" instance=ExtResource( 2 )]
-position = Vector2( 123.644, 75.7828 )
+[node name="Player" parent="." index="1" instance=ExtResource( 3 )]
+debug_on = true
 
-[node name="Jerry" parent="objects" index="1" instance=ExtResource( 2 )]
-position = Vector2( 137, 81 )
+[node name="assault_rifle" parent="objects" index="0" instance=ExtResource( 4 )]
+position = Vector2( 41.331, 142.023 )
 
-[node name="assault_rifle" parent="objects" index="2" instance=ExtResource( 3 )]
-position = Vector2( 65, 115 )
+[node name="assault_rifle2" parent="objects" index="1" instance=ExtResource( 4 )]
+position = Vector2( 166.988, 176.42 )
 
-[node name="Sprite" type="Sprite" parent="." index="2"]
+[node name="pistol" parent="objects" index="2" instance=ExtResource( 5 )]
+position = Vector2( -23.6713, 105.685 )
+
+[node name="starting_units" type="YSort" parent="objects" index="3"]
+
+[node name="Tom" parent="objects/starting_units" index="0" instance=ExtResource( 6 )]
+position = Vector2( -262.691, 98.7096 )
+start_as_player = true
+starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
+
+[node name="Tom2" parent="objects/starting_units" index="1" instance=ExtResource( 6 )]
+position = Vector2( -153.423, 32.6119 )
+start_as_player = true
+starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
+
+[node name="Tom3" parent="objects/starting_units" index="2" instance=ExtResource( 6 )]
+position = Vector2( -121.416, 84.5633 )
+start_as_player = true
+starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
+
+[node name="Jerry" parent="objects/starting_units" index="3" instance=ExtResource( 6 )]
+position = Vector2( 754.769, 249.383 )
+team_name = "Others"
+starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
+
+[node name="Jerry2" parent="objects/starting_units" index="4" instance=ExtResource( 6 )]
+position = Vector2( 1209.1, -49.9317 )
+team_name = "Others"
+starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
+
+[node name="Jerry3" parent="objects/starting_units" index="5" instance=ExtResource( 6 )]
+position = Vector2( 1139.19, 147.063 )
+team_name = "Others"
+starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
+
+[node name="cash" parent="objects" index="4" instance=ExtResource( 7 )]
+position = Vector2( 344.517, 71.289 )
+amount = 5
+
+[node name="leather_jacket" parent="objects" index="5" instance=ExtResource( 8 )]
+position = Vector2( 38.8345, 203.049 )
+
+[node name="machine_pistol" parent="objects" index="6" instance=ExtResource( 9 )]
+position = Vector2( -17.4755, 181.69 )
+
+[node name="rags" parent="objects" index="7" instance=ExtResource( 10 )]
+position = Vector2( 262.133, 203.604 )
+
+[node name="rag_hood" parent="objects" index="8" instance=ExtResource( 11 )]
+position = Vector2( 303.464, 224.408 )
+
+[node name="Sprite" type="Sprite" parent="." index="3"]
 position = Vector2( 348.739, 153.958 )
-texture = ExtResource( 4 )
+texture = ExtResource( 12 )
 
-[node name="Player" parent="." index="3" instance=ExtResource( 5 )]
+[node name="CombatManager" parent="." index="4" instance=ExtResource( 13 )]

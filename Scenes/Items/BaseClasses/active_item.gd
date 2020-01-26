@@ -23,6 +23,8 @@ func set_enemy(enemy = true):
 
 #
 
+
+
 func flip(face : int):
 	if face == -1:
 		$Sprite.flip_v = true

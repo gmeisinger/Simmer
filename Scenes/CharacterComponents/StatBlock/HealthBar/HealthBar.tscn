@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/CharacterComponents/StatBlock/HealthBar/HealthBar.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="HealthBar" type="ProgressBar"]
+margin_right = 48.0
+margin_bottom = 8.0
+mouse_filter = 2
+custom_styles/bg = SubResource( 1 )
+percent_visible = false
+script = ExtResource( 1 )

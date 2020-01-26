@@ -7,6 +7,8 @@
 
 [node name="item" type="Node2D"]
 script = ExtResource( 1 )
+item_name = "Basic Item"
+description = "An Item."
 
 [node name="Sprite" type="Sprite" parent="."]
 use_parent_material = true

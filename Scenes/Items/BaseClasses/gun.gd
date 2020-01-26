@@ -1,10 +1,13 @@
 extends "res://Scenes/Items/BaseClasses/active_item.gd"
 
+export var attack_range = 500.0
 export var damage : float
 export var fire_rate : float = 0.05
 export(float, 0.0, 1.0, 0.01) var accuracy = 1.0 #perfect accuracy
 export(float, 0.0, 1.0, 0.01) var recoil
 export(String, FILE, "*.tscn") var bullet_scene
+export var burst_count = 3
+export var burst_delay = 1.0
 
 var bullet
 
@@ -32,6 +35,8 @@ func shoot(target : Vector2):
 	var new_bullet = bullet.instance()
 	target = apply_accuracy(target, accuracy)
 	new_bullet.init(damage, enemy)
+	new_bullet.set_team(team_name)
+	new_bullet.cur_owner = cur_owner
 	globals.get("cur_scene").add_object(new_bullet)
 	new_bullet.position = $"Sprite/fire_point".global_position
 	new_bullet.fire(target)

@@ -1,7 +1,9 @@
 extends "res://Scenes/StateMachine/baseState.gd"
 
 func enter():
-	#host.hide()
+	#var interactable = host.get_node("interactable")
+	#if interactable:
+		#interactable.set_active(false)
 	pass
 
 func exit():

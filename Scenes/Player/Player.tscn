@@ -1,20 +1,45 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Camera/player_camera.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Player/BoxSelect/BoxSelect.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/MenuComponents/ActionMenu/ActionMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Player/Ui/Tooltip.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Fonts/MenuFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Scenes/Player/BoxSelect/BoxSelect.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/MenuComponents/ActionMenu/ActionMenu.tscn" type="PackedScene" id=6]
 
 [node name="Player" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
-player_color = Color( 0.117647, 0.435294, 0.313726, 1 )
+player_color = Color( 0.556863, 0.145098, 0.113725, 1 )
 
 [node name="player_camera" parent="." instance=ExtResource( 2 )]
+z_index = 10
 current = true
 
-[node name="BoxSelect" parent="." instance=ExtResource( 3 )]
+[node name="hud" type="CanvasLayer" parent="player_camera"]
 
-[node name="ActionMenu" parent="." instance=ExtResource( 4 )]
+[node name="Tooltip" parent="player_camera/hud" instance=ExtResource( 3 )]
+visible = false
+margin_left = 342.419
+margin_top = -262.389
+margin_right = 342.419
+margin_bottom = -262.389
+
+[node name="output" type="Label" parent="player_camera/hud"]
+margin_left = 21.5609
+margin_top = 437.302
+margin_right = 458.561
+margin_bottom = 580.302
+grow_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "TEST"
+valign = 2
+autowrap = true
+
+[node name="BoxSelect" parent="." instance=ExtResource( 5 )]
+
+[node name="ActionMenu" parent="." instance=ExtResource( 6 )]
+[connection signal="set_tooltip" from="." to="player_camera/hud/Tooltip" method="set_target"]
 [connection signal="detected_list_updated" from="BoxSelect" to="." method="_on_BoxSelect_detected_list_updated"]
 [connection signal="hard_select" from="BoxSelect" to="." method="_on_BoxSelect_hard_select"]
 [connection signal="item_selected" from="ActionMenu" to="." method="_on_ActionMenu_item_selected"]

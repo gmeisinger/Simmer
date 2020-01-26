@@ -3,8 +3,7 @@
 [ext_resource path="res://Scenes/Items/BaseClasses/armor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Sprites/Items/Armor/leather_jacket.png" type="Texture" id=2]
 
-[node name="leather_jacket" instance=ExtResource( 1 )]
-icon_rect = null
+[node name="leather_jacket" index="0" instance=ExtResource( 1 )]
 item_name = "Leather Jacket"
 description = "Very cool."
 slot = "armor"
@@ -14,5 +13,11 @@ texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interactable/area" index="0"]
 polygon = PoolVector2Array( -10, 3, 10, 3, 10, 13, 8, 19, -8, 19, -10, 13 )
+
+[node name="host_name" parent="interactable" index="1"]
+margin_left = -20.0272
+margin_top = -13.9098
+margin_right = 19.9728
+margin_bottom = 0.0902367
 
 [editable path="interactable"]

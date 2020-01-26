@@ -19,14 +19,15 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 0 ]
 }
 
-[node name="pistol" instance=ExtResource( 1 )]
-icon_rect = null
-item_name = "Basic Item"
-description = "An item."
+[node name="pistol" index="0" instance=ExtResource( 1 )]
+item_name = "Pistol"
+description = "Basic self-defense."
 handle_offset = Vector2( -4, -3 )
 damage = 1.0
 fire_rate = 0.3
 bullet_scene = "res://scenes/items/bullets/bullet.tscn"
+burst_count = 1
+burst_delay = 0.5
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
@@ -36,6 +37,12 @@ position = Vector2( 9, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interactable/area" index="0"]
 polygon = PoolVector2Array( -4, 5, -4, -2, 7, -2, 6, 2, -1, 5 )
+
+[node name="host_name" parent="interactable" index="1"]
+margin_left = -20.0
+margin_top = -22.0
+margin_right = 20.0
+margin_bottom = -8.0
 
 [node name="AnimationPlayer" parent="." index="3"]
 anims/fire = SubResource( 1 )

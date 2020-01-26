@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Player/Ui/Tooltip.gd" type="Script" id=1]
+
+[node name="Tooltip" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 392.877
+margin_top = 205.033
+margin_right = -371.123
+margin_bottom = 5.03271
+mouse_filter = 2
+script = ExtResource( 1 )
+
+[node name="panel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -134.5
+margin_top = -14.0
+margin_right = 134.5
+margin_bottom = 14.0
+
+[node name="entries" type="VBoxContainer" parent="panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 262.0
+margin_bottom = 21.0
+grow_vertical = 0
+rect_min_size = Vector2( 200, 0 )
+alignment = 1
+
+[node name="entry" type="HBoxContainer" parent="panel/entries"]
+margin_right = 255.0
+margin_bottom = 14.0
+custom_constants/separation = 24
+alignment = 1
+
+[node name="key" type="Label" parent="panel/entries/entry"]
+margin_right = 100.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 100, 0 )
+text = "Name"
+
+[node name="seperator" type="Label" parent="panel/entries/entry"]
+margin_left = 124.0
+margin_right = 131.0
+margin_bottom = 14.0
+text = "|"
+
+[node name="val" type="Label" parent="panel/entries/entry"]
+margin_left = 155.0
+margin_right = 255.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 100, 0 )
+text = "item_name"

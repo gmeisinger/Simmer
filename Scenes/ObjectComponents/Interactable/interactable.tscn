@@ -1,10 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/ObjectComponents/Interactable/interactable.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Fonts/MenuFont.tres" type="DynamicFont" id=2]
 
 [node name="interactable" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
+outline_shader = "res://Assets/Shaders/Outline/outline.tres"
 
 [node name="area" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="host_name" type="Label" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Name"
+align = 1
+valign = 1
 [connection signal="mouse_entered" from="area" to="." method="_on_area_mouse_entered"]
 [connection signal="mouse_exited" from="area" to="." method="_on_area_mouse_exited"]

@@ -9,7 +9,7 @@ export var hairColor : Color = Color("000000")
 var velocity = Vector2()
 var h_face = 1
 var v_face = "down"
-var acceleration = 0.5
+var acceleration = 4.0
 var max_speed = 2.0
 var friction = 1.5
 var tracking_target = false
@@ -19,7 +19,8 @@ func _ready():
 	$pants.self_modulate = pantsColor
 	$hair.self_modulate = hairColor
 
-
+func get_object_name():
+	return name
 
 # Movement
 func process_movement(delta):
@@ -68,7 +69,7 @@ func apply_friction(delta):
 	velocity -= velocity * friction * delta
 
 # Combat
-func primary_fire(target : Vector2):
+func attack(target : Vector2):
 	pass
 
 func take_bullet(bullet):

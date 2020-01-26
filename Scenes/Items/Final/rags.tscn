@@ -4,7 +4,6 @@
 [ext_resource path="res://Assets/Sprites/Items/Armor/dark_rags.png" type="Texture" id=2]
 
 [node name="rags" instance=ExtResource( 1 )]
-icon_rect = null
 item_name = "Rags"
 description = "Better than nothing."
 slot = "armor"
@@ -14,5 +13,11 @@ texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interactable/area" index="0"]
 polygon = PoolVector2Array( -10, 16, -10, 3, 10, 3, 10, 17, 6, 23, -6, 23 )
+
+[node name="host_name" parent="interactable" index="1"]
+margin_left = -19.5197
+margin_top = -13.8501
+margin_right = 20.4803
+margin_bottom = 0.149918
 
 [editable path="interactable"]

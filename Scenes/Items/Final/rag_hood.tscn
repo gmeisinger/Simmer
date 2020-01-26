@@ -4,7 +4,6 @@
 [ext_resource path="res://Assets/Sprites/Items/Helmets/dark_hood.png" type="Texture" id=2]
 
 [node name="rag_hood" instance=ExtResource( 1 )]
-icon_rect = null
 item_name = "Rag Hood"
 description = "Better than nothing."
 slot = "helmet"
@@ -15,5 +14,11 @@ texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interactable/area" index="0"]
 polygon = PoolVector2Array( -12, 3, -12, -17, -9, -19, 10, -19, 14, -11, 14, 1, 10, 5, -10, 5 )
+
+[node name="host_name" parent="interactable" index="1"]
+margin_left = -19.7627
+margin_top = -32.5993
+margin_right = 20.2373
+margin_bottom = -18.5993
 
 [editable path="interactable"]

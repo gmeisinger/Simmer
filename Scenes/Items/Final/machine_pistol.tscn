@@ -13,24 +13,37 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.299187 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 0, 1, 2, 0 ]
 }
 
 [node name="machine_pistol" instance=ExtResource( 1 )]
-icon_rect = null
-item_name = "Basic Item"
-description = "An item."
+item_name = "Machine Pistol"
+description = "For faster pews."
 handle_offset = Vector2( -4, -2 )
+attack_range = 300.0
+damage = 3.0
+accuracy = 0.8
+burst_count = 5
+burst_delay = 0.8
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
-frame = 2
+frame = 1
+
+[node name="fire_point" type="Position2D" parent="Sprite" index="0"]
+position = Vector2( 14.4771, -4.1002 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interactable/area" index="0"]
 polygon = PoolVector2Array( -7, 5, -9, -1, -9, -5, -7, -6, 8, -6, 11, -5, 11, -3, 3, 0, 3, 5 )
+
+[node name="host_name" parent="interactable" index="1"]
+margin_left = -19.7438
+margin_top = -20.8774
+margin_right = 20.2562
+margin_bottom = -6.87742
 
 [node name="AnimationPlayer" parent="." index="3"]
 anims/fire = SubResource( 1 )

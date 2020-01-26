@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/CharacterComponents/StatBlock/StatBlock.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/CharacterComponents/StatBlock/HealthBar/HealthBar.tscn" type="PackedScene" id=2]
 
-[node name="StatBlock" type="Node2D"]
+[node name="StatBlock" type="Control"]
 script = ExtResource( 1 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 2 )]
+margin_left = -24.1413
+margin_top = 14.0257
+margin_right = 23.8587
+margin_bottom = 22.0257

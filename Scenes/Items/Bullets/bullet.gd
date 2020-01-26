@@ -3,9 +3,12 @@ extends Sprite
 var lifetime = 0.0
 var max_lifetime = 8.0
 
+var team_name
+var cur_owner
+
 var speed = 400.0
 var damage = 1.0
-var knockback = 0.005
+var knockback = 0.001
 
 var fired = false
 var velocity : Vector2 = Vector2(0.0, 0.0)
@@ -21,6 +24,12 @@ func init(_damage : float, enemy : bool = false):
 func fire(target : Vector2):
 	fired = true
 	velocity = target.normalized() * speed
+
+func set_team(_team_name : String):
+	team_name = _team_name
+
+func get_team():
+	return team_name
 
 func destroy():
 	queue_free()

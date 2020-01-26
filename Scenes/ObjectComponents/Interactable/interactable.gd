@@ -1,11 +1,13 @@
 extends Node2D
 
 signal mouse_over()
+signal update_select(_selected)
 
 var selected = false
 var select_locked = false
 var active = true
-onready var outline_material = load("res://Assets/Shaders/Outline/outline.tres")
+export(String, FILE, "*.tres") var outline_shader
+onready var outline_material = load(outline_shader)
 
 export(String, MULTILINE) var option_lines
 var options = []
@@ -17,6 +19,13 @@ onready var area = $area
 func _ready():
 	SignalMgr.register_publisher(self, "mouse_over")
 	read_options()
+	var new_name = host.name
+	if host.has_method("get_object_name"):
+		new_name = host.get_object_name()
+	set_host_name(new_name)
+
+func get_host():
+	return host
 
 func read_options():
 	options.clear()
@@ -24,14 +33,24 @@ func read_options():
 		options.append(op.capitalize())
 
 func get_options():
+	if options.empty():
+		read_options()
 	return options
+
+func set_host_name(new_name : String):
+	$host_name.set_text(new_name)
 
 func set_player(set : bool):
 	$area.set_collision_layer_bit(1, set)
 
+func is_player():
+	return $area.get_collision_layer_bit(1)
+
 func set_select(_selected : bool = true):
+	emit_signal("update_select", _selected)
 	selected = _selected
-	if selected:
+	$host_name.visible = selected
+	if selected and outline_material:
 		host.set_material(outline_material.duplicate())
 	else:
 		host.set_material(null)
@@ -72,16 +91,18 @@ func set_active(act = true):
 
 func interact(source : Node, selected : String = ""):
 	if active:
-		#read_options()
+		read_options()
 		if selected == "" or !options.has(selected):
 			selected = options[0]
 		host.interact(source, selected)
 
 func _on_area_mouse_entered():
+	#print("mouse detected")
 	if active:
 		emit_signal("mouse_over", true, self)
 
 
 func _on_area_mouse_exited():
+	#print("mouse exit")
 	if active:
 		emit_signal("mouse_over", false, self)

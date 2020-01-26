@@ -26,9 +26,30 @@ func get_move_command(target : Vector2, randomness = 0.0):
 	comm.set_parameter("move_target", target)
 	return comm
 
-func get_interact_command(target_interactable, action_name : String):
+func get_interact_command(target_unit, action_name : String):
 	var comm = get_script().new()
 	comm.action_name = "interact"
 	comm.next_state = "interacting"
-	comm.set_parameter("interact_target", target_interactable)
+	comm.set_parameter("interact_target", target_unit)
+	comm.set_parameter("interact_target_valid", true)
+	comm.set_parameter("interact_target_wr", weakref(target_unit))
+	return comm
+
+func get_approach_command(target_unit, target_distance):
+	var comm = get_script().new()
+	comm.action_name = "approach"
+	comm.next_state = "approaching"
+	comm.set_parameter("focus_target", target_unit)
+	comm.set_parameter("focus_target_valid", true)
+	comm.set_parameter("focus_target_wr", weakref(target_unit))
+	comm.set_parameter("move_threshold", target_distance)
+	return comm
+
+func get_attack_command(target_unit):
+	var comm = get_script().new()
+	comm.action_name = "attack"
+	comm.next_state = "attacking"
+	comm.set_parameter("focus_target", target_unit)
+	comm.set_parameter("focus_target_valid", true)
+	comm.set_parameter("focus_target_wr", weakref(target_unit))
 	return comm

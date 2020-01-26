@@ -32,6 +32,8 @@ func add_item(item_ref):
 	if is_full():
 		#notify inv full
 		return
+	item_ref.set_team(host.get_team())
+	item_ref.set_ownership(host)
 	items.append(item_ref)
 	if auto_equip and item_ref.slot and equips[item_ref.slot] == null:
 		equip(item_ref)
@@ -39,15 +41,16 @@ func add_item(item_ref):
 func drop_item(item_ref):
 	if not item_ref: return
 	var last_pos = item_ref.global_position
+	if is_equipped(item_ref):
+		item_ref = unequip(item_ref)
 	if item_ref.get_state() == "stored":
 		last_pos = host.global_position
-	if is_equipped(item_ref):
-		unequip(item_ref)
 	#make it a pickup
 	#add it to zone obj list
 	globals.get("cur_scene").add_object(item_ref)
 	item_ref.change_state("pickup")
 	item_ref.position = last_pos
+	#item_ref.cur_owner = item_ref.get_parent()
 	items.erase(item_ref)
 
 func throw_item(item_ref):
@@ -67,9 +70,19 @@ func unequip(item_ref):
 	equips[item_ref.slot] = null
 	host.unequip(item_ref.slot)
 	item_ref.change_state("stored")
+	return item_ref
+
+func unequip_slot(slot : String):
+	if not equips[slot]: return
+	var ref = unequip(equips[slot])
+	return ref
 
 func equip(item_ref):
 	if not item_ref: return
+	if equips[item_ref.slot]:
+		drop_item(equips[item_ref.slot])
+	item_ref.set_team(host.get_team())
+	item_ref.set_ownership(host)
 	equips[item_ref.slot] = item_ref
 	host.equip(item_ref)
 	item_ref.change_state("equipped")

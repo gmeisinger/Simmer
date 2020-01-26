@@ -76,4 +76,5 @@ func watch_tree_exited(publisherSubscriber):
 func on_tree_exited(publisherSubscriber):
 	unregister(publisherSubscriber)
 
-
+func _ready():
+	set_pause_mode(Node.PAUSE_MODE_PROCESS)

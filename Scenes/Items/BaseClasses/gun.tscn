@@ -3,11 +3,10 @@
 [ext_resource path="res://Scenes/Items/BaseClasses/active_item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Items/BaseClasses/gun.gd" type="Script" id=2]
 
-
-
 [node name="gun" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 slot = "weapon"
+bullet_scene = "res://Scenes/Items/Bullets/bullet.tscn"
 
 [node name="Sprite" parent="." index="0"]
 hframes = 3

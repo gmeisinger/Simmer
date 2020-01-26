@@ -6,7 +6,7 @@
 
 [node name="cash" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-item_name = "cash"
+item_name = "Cash"
 description = "Cold and hard."
 
 [node name="Sprite" parent="." index="0"]
@@ -15,5 +15,11 @@ hframes = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="interactable/area" index="0"]
 polygon = PoolVector2Array( -11, -6, 10, -6, 10, 7, -11, 7 )
+
+[node name="host_name" parent="interactable" index="1"]
+margin_left = -20.7627
+margin_top = -19.7066
+margin_right = 19.2373
+margin_bottom = -5.70657
 
 [editable path="interactable"]
