@@ -1,6 +1,7 @@
 extends "res://Scenes/StateMachine/baseState.gd"
 
 func enter():
+	print("moving")
 	host.disable_focus()
 	host.disable_interact()
 
@@ -13,4 +14,4 @@ func update(delta):
 	host.process_move_and_collide(delta)
 	
 func _on_Character_arrived():
-	change_state("idle")
+	change_state(host.default_state)

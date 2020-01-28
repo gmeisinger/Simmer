@@ -83,6 +83,8 @@ func equip(item_ref):
 		drop_item(equips[item_ref.slot])
 	item_ref.set_team(host.get_team())
 	item_ref.set_ownership(host)
+	if not items.has(item_ref):
+		items.append(item_ref)
 	equips[item_ref.slot] = item_ref
 	host.equip(item_ref)
 	item_ref.change_state("equipped")

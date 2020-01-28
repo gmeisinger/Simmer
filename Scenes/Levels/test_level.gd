@@ -14,6 +14,7 @@ func _ready():
 		var new_pc = char_scene.instance()
 		new_pc.start_as_player = true
 		new_pc.name = fashion_dict["player_name"]
+		new_pc.position = player_start
 		add_object(new_pc)
 		new_pc.set_hair(fashion_dict["hair"])
 		new_pc.set_hair_color(fashion_dict["hair_color"])
@@ -26,12 +27,3 @@ func _ready():
 			TeamMgr.add_unit_to_team(unit, unit.team_name)
 		else:
 			unit.team_name = "none"
-	# give jerry a gun
-	"""
-	var ak_scene = load("res://Scenes/Items/Final/assault_rifle.tscn")
-	var jerrys = [ $objects/starting_units/Jerry, $objects/starting_units/Jerry2, $objects/starting_units/Jerry3 ]
-	for j in jerrys:
-		var new_ak = ak_scene.instance()
-		add_object(new_ak)
-		new_ak.interact(j, "Equip")
-	"""

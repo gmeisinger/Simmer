@@ -11,7 +11,7 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PoolVector2Array( -44.0373, -33.5851, -0.209778, -54.1119, 58.5194, -59.2428, 568.418, -379.054, 842.753, 0.794983, 591.028, 389.688, 62.6262, 52.1523, 0.622391, 47.69, -41.5408, 31.324, -56.2424, -2.24008 )
+polygon = PoolVector2Array( -66.3516, -30.6462, 568.418, -379.054, 842.753, 0.794983, 591.028, 389.688, -63.1163, 35.0311 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
@@ -22,6 +22,8 @@ autostart = true
 visible = false
 color = Color( 0.176471, 0.419608, 0.470588, 0.431373 )
 polygon = PoolVector2Array( -42.0153, -33.3696, 568.497, -377.702, 843.19, -0.870819, 598.675, 390.662, -35.825, 32.4016 )
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_Area2D_area_exited"]
 [connection signal="timeout" from="update_timer" to="." method="_on_update_timer_timeout"]

@@ -39,7 +39,11 @@ autowrap = true
 [node name="BoxSelect" parent="." instance=ExtResource( 5 )]
 
 [node name="ActionMenu" parent="." instance=ExtResource( 6 )]
+
+[node name="click_timer" type="Timer" parent="."]
+one_shot = true
 [connection signal="set_tooltip" from="." to="player_camera/hud/Tooltip" method="set_target"]
 [connection signal="detected_list_updated" from="BoxSelect" to="." method="_on_BoxSelect_detected_list_updated"]
 [connection signal="hard_select" from="BoxSelect" to="." method="_on_BoxSelect_hard_select"]
 [connection signal="item_selected" from="ActionMenu" to="." method="_on_ActionMenu_item_selected"]
+[connection signal="timeout" from="click_timer" to="." method="_on_click_timer_timeout"]

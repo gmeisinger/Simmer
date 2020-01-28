@@ -1,5 +1,7 @@
 extends Node2D
 
+const SINGLE_SELECT_TIMER = 0.2
+
 signal detected_list_updated(detected)
 signal hard_select(selected)
 var active = false
@@ -10,6 +12,8 @@ var start_pos = Vector2()
 onready var player = get_parent()
 onready var shape = $Area2D/CollisionShape2D.get_shape()
 
+var lifetime = 0.0
+
 func _ready():
 	$ColorRect.color = globals.get("color_dark_green")
 	$ColorRect.color.a = 0.5
@@ -17,9 +21,12 @@ func _ready():
 	set_process(false)
 	
 func _process(delta):
+	lifetime += delta
 	update_rect(get_global_mouse_position())
+	
 
 func start(pos : Vector2):
+	lifetime = 0.0
 	start_pos = pos
 	active = true
 	set_process(true)
@@ -40,7 +47,10 @@ func update_rect(end_pos : Vector2):
 
 func end():
 	if not detected.empty():
-		emit_signal("hard_select", detected)
+		if lifetime > SINGLE_SELECT_TIMER:
+			emit_signal("hard_select", detected)
+		else:
+			emit_signal("hard_select", [detected[0]])
 	active = false
 	$Area2D.monitoring = false
 	detected.clear()

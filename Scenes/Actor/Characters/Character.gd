@@ -9,6 +9,7 @@ signal arrived_at_move_target()
 signal characer_dying(ref)
 signal character_attacking(ref, target)
 signal character_no_target(ref)
+signal notify()
 
 onready var unarmed_weapon = load("res://Scenes/Items/Unarmed/unarmed_weapon.tscn")
 
@@ -32,8 +33,11 @@ var interact_action : String
 
 var in_combat = false
 var combat_id : String
+var los_trigger_state = null
 
 export var team_name : String
+
+var next_state : String = ""
 
 export var start_as_player = false
 export var default_state : String = "idle"
@@ -45,6 +49,8 @@ func _ready():
 	SignalMgr.register_publisher(self, "character_dying")
 	SignalMgr.register_publisher(self, "character_attacking")
 	SignalMgr.register_publisher(self, "character_no_target")
+	SignalMgr.register_publisher(self, "notify")
+	SignalMgr.register_subscriber(self, "pause_game", "_on_pause")
 	set_player(start_as_player)
 	var equip_scn
 	var equip
@@ -69,6 +75,7 @@ func get_state():
 	return $stateMachine.current_state.name
 
 func process_movement(delta):
+	move_target = globals.get("cur_scene").closest_point(move_target)
 	if position.distance_to(move_target) > move_threshold:
 		var delta_vel = position.direction_to(move_target) * acceleration * delta
 		velocity += delta_vel
@@ -78,8 +85,8 @@ func process_movement(delta):
 		velocity = velocity / 3.0
 		if velocity.length() < 0.1:
 			velocity = Vector2.ZERO
-			#emit_signal("arrived_at_move_target")
-			$stateMachine.change_state(default_state)
+			emit_signal("arrived_at_move_target")
+			#$stateMachine.change_state(default_state)
 	var v_face = sign(velocity.y)
 	var new_sightcone_rotation = $SightCone.get_rotation()
 	if focus_target:
@@ -90,7 +97,7 @@ func process_movement(delta):
 		h_face = sign(velocity.x)
 		new_sightcone_rotation = velocity.angle()
 	face_sprites(h_face, v_face)
-	$SightCone.rotation = new_sightcone_rotation
+	$SightCone.rotate_to_angle(new_sightcone_rotation)
 
 # Command Methods
 
@@ -135,11 +142,27 @@ func react_to_action(source, act_name : String):
 func say(msg):
 	$SpeechBubble.say(msg)
 
+func get_nav_path(point : Vector2):
+	var path = globals.get("cur_scene").get_nav(global_position, point)
+		#print("really close to first position")
+	var final_path = PoolVector2Array()
+	for i in range(1, path.size()):
+		if global_position.distance_to(path[i]) > move_threshold:
+			final_path.append(path[i])
+	return final_path
+
 func get_target():
 	var target_vec = Vector2(h_face * 100.0, 0.0)
 	if check_focus():
 		target_vec = focus_target.global_position - global_position
 	return target_vec
+
+func check_los(point : Vector2):
+	$LOS.cast_to = point - global_position
+	$LOS.force_raycast_update()
+	#$LOS.enabled = true
+	return !$LOS.is_colliding()
+	
 
 func check_focus():
 	var valid = false
@@ -255,7 +278,11 @@ func die():
 func _on_StatBlock_zero_health():
 	$stateMachine.change_state("dying")
 
-
+func _on_pause(pause):
+	$stateMachine.disabled = pause
+	if pause:
+		$AnimationPlayer.stop(false)
+	
 func _on_update_sight_cone(objs):
 	if in_combat: return
 	for obj in objs:
@@ -264,7 +291,7 @@ func _on_update_sight_cone(objs):
 				if obj.is_in_combat():
 					var combat = obj.combat_id
 					globals.get("CombatManager").enter_existing_combat(self, combat)
-					say("Hey!")
+					emit_signal("notify", global_position, "!", Color.red)
 			"item":
 				pass
 			_:

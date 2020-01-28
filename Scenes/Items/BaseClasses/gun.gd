@@ -1,6 +1,7 @@
 extends "res://Scenes/Items/BaseClasses/active_item.gd"
 
 export var attack_range = 500.0
+export var minimum_range = 100.0
 export var damage : float
 export var fire_rate : float = 0.05
 export(float, 0.0, 1.0, 0.01) var accuracy = 1.0 #perfect accuracy
@@ -36,7 +37,7 @@ func shoot(target : Vector2):
 	target = apply_accuracy(target, accuracy)
 	new_bullet.init(damage, enemy)
 	new_bullet.set_team(team_name)
-	new_bullet.cur_owner = cur_owner
+	new_bullet.cur_owner = weakref(get_cur_owner())
 	globals.get("cur_scene").add_object(new_bullet)
 	new_bullet.position = $"Sprite/fire_point".global_position
 	new_bullet.fire(target)

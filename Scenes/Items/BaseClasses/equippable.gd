@@ -18,8 +18,6 @@ func interact(source : Node, command : String):
 			get_parent().remove_child(self)
 			source.get_node("inventoryMgr").equip(self)
 			$item_state.change_state("equipped")
-			cur_owner = source
 		"Pickup":
 			get_parent().remove_child(self)
 			source.get_node("inventoryMgr").add_item(self)
-			cur_owner = source

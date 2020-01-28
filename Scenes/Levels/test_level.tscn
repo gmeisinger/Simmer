@@ -2,83 +2,86 @@
 
 [ext_resource path="res://Scenes/Zone/zone.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Levels/test_level.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Items/Final/assault_rifle.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Items/Final/pistol.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Actor/Characters/Character.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Items/Final/cash.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Items/Final/leather_jacket.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Items/Final/machine_pistol.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Items/Final/rags.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Items/Final/rag_hood.tscn" type="PackedScene" id=11]
-[ext_resource path="res://icon.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Tiles/Tilemaps/Complex1_map.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Items/Final/assault_rifle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Items/Final/pistol.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Actor/Characters/Character.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Items/Final/cash.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Items/Final/leather_jacket.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Items/Final/machine_pistol.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Items/Final/rags.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Items/Final/rag_hood.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Zone/CombatManager/CombatManager.tscn" type="PackedScene" id=13]
 
 [node name="test_level" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+player_start = Vector2( 160, 260 )
 
-[node name="Player" parent="." index="1" instance=ExtResource( 3 )]
+[node name="Complex1" parent="map" index="0" instance=ExtResource( 3 )]
+
+[node name="navMap" parent="map/nav" index="1"]
+visible = false
+tile_data = PoolIntArray( 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131090, 0, 0, 131091, 0, 0, 131092, 0, 0, 131093, 0, 0, 131094, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 0, 0, 196625, 0, 0, 196626, 0, 0, 196627, 0, 0, 196628, 0, 0, 196629, 0, 0, 196630, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262162, 0, 0, 262163, 0, 0, 262164, 0, 0, 262165, 0, 0, 262166, 0, 0, 262171, 0, 0, 262172, 0, 0, 262173, 0, 0, 262174, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327700, 0, 0, 327707, 0, 0, 327708, 0, 0, 327709, 0, 0, 327710, 0, 0, 393236, 0, 0, 393243, 0, 0, 393244, 0, 0, 393245, 0, 0, 393246, 0, 0, 458772, 0, 0, 458779, 0, 0, 458780, 0, 0, 458781, 0, 0, 458782, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524308, 0, 0, 524315, 0, 0, 524316, 0, 0, 524317, 0, 0, 524318, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589844, 0, 0, 589851, 0, 0, 589852, 0, 0, 589853, 0, 0, 589854, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 655380, 0, 0, 655381, 0, 0, 655382, 0, 0, 655383, 0, 0, 655384, 0, 0, 655385, 0, 0, 655386, 0, 0, 655387, 0, 0, 655388, 0, 0, 655389, 0, 0, 655390, 0, 0, 720916, 0, 0, 720923, 0, 0, 720924, 0, 0, 720925, 0, 0, 720926, 0, 0, 786452, 0, 0, 786459, 0, 0, 786460, 0, 0, 786461, 0, 0, 786462, 0, 0, 851988, 0, 0, 917524, 0, 0, 983060, 0, 0 )
+
+[node name="Player" parent="." index="1" instance=ExtResource( 4 )]
 debug_on = true
 
-[node name="assault_rifle" parent="objects" index="0" instance=ExtResource( 4 )]
-position = Vector2( 41.331, 142.023 )
+[node name="assault_rifle" parent="objects" index="0" instance=ExtResource( 5 )]
+position = Vector2( 1178.81, 166.276 )
 
-[node name="assault_rifle2" parent="objects" index="1" instance=ExtResource( 4 )]
-position = Vector2( 166.988, 176.42 )
+[node name="assault_rifle2" parent="objects" index="1" instance=ExtResource( 5 )]
+position = Vector2( 1304.46, 200.673 )
 
-[node name="pistol" parent="objects" index="2" instance=ExtResource( 5 )]
-position = Vector2( -23.6713, 105.685 )
+[node name="pistol" parent="objects" index="2" instance=ExtResource( 6 )]
+position = Vector2( 409.02, 258.139 )
 
 [node name="starting_units" type="YSort" parent="objects" index="3"]
 
-[node name="Tom" parent="objects/starting_units" index="0" instance=ExtResource( 6 )]
-position = Vector2( -262.691, 98.7096 )
+[node name="Tom" parent="objects/starting_units" index="0" instance=ExtResource( 7 )]
+position = Vector2( 170, 251.163 )
 start_as_player = true
 starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
 
-[node name="Tom2" parent="objects/starting_units" index="1" instance=ExtResource( 6 )]
-position = Vector2( -153.423, 32.6119 )
+[node name="Tom2" parent="objects/starting_units" index="1" instance=ExtResource( 7 )]
+position = Vector2( 279.268, 185.066 )
 start_as_player = true
 starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
 
-[node name="Tom3" parent="objects/starting_units" index="2" instance=ExtResource( 6 )]
-position = Vector2( -121.416, 84.5633 )
+[node name="Tom3" parent="objects/starting_units" index="2" instance=ExtResource( 7 )]
+position = Vector2( 311.275, 237.017 )
 start_as_player = true
 starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
 
-[node name="Jerry" parent="objects/starting_units" index="3" instance=ExtResource( 6 )]
-position = Vector2( 754.769, 249.383 )
+[node name="Jerry" parent="objects/starting_units" index="3" instance=ExtResource( 7 )]
+position = Vector2( 1740, 260 )
 team_name = "Others"
 starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
 
-[node name="Jerry2" parent="objects/starting_units" index="4" instance=ExtResource( 6 )]
-position = Vector2( 1209.1, -49.9317 )
+[node name="Jerry2" parent="objects/starting_units" index="4" instance=ExtResource( 7 )]
+position = Vector2( 1850, 320 )
 team_name = "Others"
 starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
 
-[node name="Jerry3" parent="objects/starting_units" index="5" instance=ExtResource( 6 )]
-position = Vector2( 1139.19, 147.063 )
+[node name="Jerry3" parent="objects/starting_units" index="5" instance=ExtResource( 7 )]
+position = Vector2( 810, 510 )
 team_name = "Others"
 starting_weapon = "res://Scenes/Items/Final/assault_rifle.tscn"
 
-[node name="cash" parent="objects" index="4" instance=ExtResource( 7 )]
-position = Vector2( 344.517, 71.289 )
+[node name="cash" parent="objects" index="4" instance=ExtResource( 8 )]
+position = Vector2( 825, 218 )
 amount = 5
 
-[node name="leather_jacket" parent="objects" index="5" instance=ExtResource( 8 )]
-position = Vector2( 38.8345, 203.049 )
+[node name="leather_jacket" parent="objects" index="5" instance=ExtResource( 9 )]
+position = Vector2( 1176.31, 227.302 )
 
-[node name="machine_pistol" parent="objects" index="6" instance=ExtResource( 9 )]
-position = Vector2( -17.4755, 181.69 )
+[node name="machine_pistol" parent="objects" index="6" instance=ExtResource( 10 )]
+position = Vector2( 1120, 205.943 )
 
-[node name="rags" parent="objects" index="7" instance=ExtResource( 10 )]
-position = Vector2( 262.133, 203.604 )
+[node name="rags" parent="objects" index="7" instance=ExtResource( 11 )]
+position = Vector2( 1399.61, 227.857 )
 
-[node name="rag_hood" parent="objects" index="8" instance=ExtResource( 11 )]
-position = Vector2( 303.464, 224.408 )
+[node name="rag_hood" parent="objects" index="8" instance=ExtResource( 12 )]
+position = Vector2( 1440.94, 248.661 )
 
-[node name="Sprite" type="Sprite" parent="." index="3"]
-position = Vector2( 348.739, 153.958 )
-texture = ExtResource( 12 )
-
-[node name="CombatManager" parent="." index="4" instance=ExtResource( 13 )]
+[node name="CombatManager" parent="." index="3" instance=ExtResource( 13 )]

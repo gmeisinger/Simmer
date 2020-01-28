@@ -9,9 +9,14 @@ issues commands to hard selected units
 
 """
 
+const CLICK_HOLD_TIME = 0.1
+
 export var debug_on : bool
 
 signal set_tooltip(tt_target)
+signal pause_game(pause)
+
+var pause = false
 
 var soft_selected = []
 var hard_selected = []
@@ -22,6 +27,8 @@ var action_menu_target = null
 
 var tooltip_target = null
 
+var click_held = false
+
 export var player_color : Color
 
 onready var zone = get_parent()
@@ -29,18 +36,12 @@ onready var zone = get_parent()
 func _ready():
 	globals.set("player", self)
 	SignalMgr.register_subscriber(self, "mouse_over", "_on_mouse_over")
+	SignalMgr.register_publisher(self, "pause_game")
 
 func _input(event):
 	if event.is_action_released("pause"):
-		#if get_tree().is_paused():
-		#	get_tree().set_pause(false)
-		#else:
-		#	get_tree().set_pause(true)
-		#	Physics2DServer.set_active(true)
-		if Engine.time_scale == 1.0:
-			Engine.time_scale = 0.1
-		else:
-			Engine.time_scale = 1.0
+		pause = !pause
+		emit_signal("pause_game", pause)
 	if event.is_action_pressed("select"):
 		$BoxSelect.start(get_global_mouse_position())
 	elif event.is_action_released("select"):
@@ -81,7 +82,8 @@ func move_units(pos : Vector2):
 		var unit = interactable.get_parent()
 		var randomness = hard_selected.size() * 0.75
 		unit.clear_commands()
-		unit.execute_command(Command.get_move_command(pos, randomness))
+		unit.execute_command(Command.get_pathfind_command(pos))
+		#unit.execute_command(Command.get_move_command(pos, randomness))
 
 func get_additional_commands(source : Array, target, command_list):
 	var ret = []
@@ -191,3 +193,8 @@ func _on_ActionMenu_item_selected(action_text):
 			issue_command(interact_command)
 			action_menu_target.emit_signal("mouse_over", false, action_menu_target)
 			action_menu_target = null
+
+
+func _on_click_timer_timeout():
+	click_held = true
+	

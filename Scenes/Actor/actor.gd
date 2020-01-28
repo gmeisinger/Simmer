@@ -9,9 +9,9 @@ export var hairColor : Color = Color("000000")
 var velocity = Vector2()
 var h_face = 1
 var v_face = "down"
-var acceleration = 4.0
+var acceleration = 32.0
 var max_speed = 2.0
-var friction = 1.5
+var friction = 4.0
 var tracking_target = false
 
 func _ready():

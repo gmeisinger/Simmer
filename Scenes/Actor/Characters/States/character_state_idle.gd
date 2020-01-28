@@ -5,6 +5,7 @@ const TURN_TIMER = 4.0
 var turn_ready = false
 
 func enter():
+	#print("idle")
 	host.move_target = host.get_global_position()
 	host.move_threshold = host.ARRIVAL_DISTANCE
 	host.disable_focus()
@@ -12,6 +13,7 @@ func enter():
 
 func update(delta):
 	if not host.command_queue.empty():
+		print(host.command_queue[0].next_state)
 		host.execute_command(host.command_queue.pop_front())
 	elif host.is_in_combat():
 		host.emit_signal("character_no_target", host)

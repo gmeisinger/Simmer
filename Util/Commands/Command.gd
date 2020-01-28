@@ -26,13 +26,20 @@ func get_move_command(target : Vector2, randomness = 0.0):
 	comm.set_parameter("move_target", target)
 	return comm
 
+func get_pathfind_command(target : Vector2):
+	var comm = get_script().new()
+	comm.action_name = "pathfind"
+	comm.next_state = "pathfinding"
+	comm.set_parameter("move_target", target)
+	return comm
+
 func get_interact_command(target_unit, action_name : String):
 	var comm = get_script().new()
 	comm.action_name = "interact"
 	comm.next_state = "interacting"
-	comm.set_parameter("interact_target", target_unit)
-	comm.set_parameter("interact_target_valid", true)
-	comm.set_parameter("interact_target_wr", weakref(target_unit))
+	comm.set_parameter("focus_target", target_unit)
+	comm.set_parameter("focus_target_valid", true)
+	comm.set_parameter("focus_target_wr", weakref(target_unit))
 	return comm
 
 func get_approach_command(target_unit, target_distance):

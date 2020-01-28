@@ -3,6 +3,7 @@
 [ext_resource path="res://Scenes/Camera/player_camera.gd" type="Script" id=1]
 
 [node name="player_camera" type="Camera2D"]
+process_mode = 0
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 script = ExtResource( 1 )

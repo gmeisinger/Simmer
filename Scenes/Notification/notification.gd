@@ -7,6 +7,9 @@ func notify(_position : Vector2, _text :String):
 	rect_position = _position
 	$Label.text = _text
 
+func set_color(color : Color):
+	$Label.set("custom_colors/font_color", color)
+
 func _process(delta):
 	rect_position.y -= 1.0
 	lifetime += delta

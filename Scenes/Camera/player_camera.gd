@@ -1,6 +1,7 @@
 extends Camera2D
 
 const DAMP_TIME = 0.5
+const PAN_TIME = 0.01
 const MIN_ZOOM = 0.3
 const MAX_ZOOM = 1.0
 const PAN_SPEED = 500.0
@@ -49,6 +50,8 @@ func _physics_process(delta):
 	if mouse_panning:
 		var mouse_change = get_global_mouse_position() - last_mouse_pos
 		position -= mouse_change
+		#$Tween.interpolate_property(self, "position", position, new_pos, PAN_TIME,Tween.TRANS_LINEAR,Tween.EASE_IN)
+		#$Tween.start()
 	else:
 		var delta_pan = Vector2.ZERO
 		if Input.is_action_pressed("pan_left"):

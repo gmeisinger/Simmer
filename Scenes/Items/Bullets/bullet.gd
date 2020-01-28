@@ -21,6 +21,9 @@ func init(_damage : float, enemy : bool = false):
 		$hitbox.set_collision_mask_bit(2, false)
 		$hitbox.set_collision_mask_bit(1, true)
 
+func _ready():
+	SignalMgr.register_subscriber(self, "pause_game", "_on_pause")
+
 func fire(target : Vector2):
 	fired = true
 	velocity = target.normalized() * speed
@@ -45,7 +48,8 @@ func _on_hitbox_body_entered(body):
 	if body.get_collision_layer_bit(0):
 		queue_free()
 
-
+func _on_pause(pause):
+	set_physics_process(!pause)
 
 func _on_Timer_timeout():
 	queue_free()

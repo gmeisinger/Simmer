@@ -32,13 +32,13 @@ func _ready():
 	SignalMgr.register_subscriber(self, "character_no_target", "_on_character_no_target")
 	globals.set("CombatManager", self)
 
+
 func enter_existing_combat(character, combat_id):
-	print(character.name)
 	var combat = get_node(combat_id)
 	if not combat: return
 	if character.is_in_combat(): return
 	combat.add_combatant(character)
-	_on_character_no_target(character)
+	#_on_character_no_target(character)
 
 # source character uses this to request combat with target
 func enter_combat(source, target):
@@ -51,6 +51,9 @@ func enter_combat(source, target):
 				# add new combat and remove old ones
 		else:
 			var combat = get_node(source.combat_id)
+			if not combat: 
+				print("Combat not found.")
+				return
 			#add target to source's combat
 			combat.add_combatant(target)
 			# since this guy wasnt in combat, he should attack
@@ -68,7 +71,7 @@ func enter_combat(source, target):
 		new_combat.add_combatant(source)
 		new_combat.add_combatant(target)
 		#target.react_to_action(source, "attack")
-		_on_character_no_target(target)
+		#_on_character_no_target(target)
 
 func _on_character_no_target(character):
 	var combat = get_node(character.combat_id)
